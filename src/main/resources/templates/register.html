@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+  <head>
+    <title>Register</title>
+  </head>
+  <body>
+    <div id="content">
+      <div class="grid grid-cols-12">
+        <div class="col-span-4 md:col-span-2 lg:col-span-3 xl:col-span-4"></div>
+        <div class="col-span-12 md:col-span-8 lg:col-span-6 xl:col-span-4">
+          <div
+            href="#"
+            class="block p-6 border-t-8 border-blue-600 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          >
+            <h5
+              class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center"
+            >
+              Sign Up
+            </h5>
+            <p class="font-normal text-gray-400 dark:text-gray-400">
+              Start managing contacts on cloud...
+            </p>
+            <!-- This is register form -->
+            <form 
+                data-th-action="@{'/do-register'}" 
+                method="post" 
+                data-th-object = "${userForm}"
+                class="mt-5">
+                <!-- First Name and Last Name in a Single Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <!-- First Name -->
+                  <div>
+                    <label class="block text-sm font-medium mb-1" for="fName">First Name</label>
+                    <input 
+                        type="text" 
+                        id="fName" 
+                        name="fName" 
+                        data-th-field="*{fName}"
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                  </div>
+                  <!-- Last Name -->
+                  <div>
+                    <label class="block text-sm font-medium mb-1" for="lName">Last Name</label>
+                    <input 
+                        type="text" 
+                        id="lName" 
+                        name="lName" 
+                        data-th-field="*{lName}"
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                  </div>
+                </div>
+                
+                <!-- Email -->
+                <div class="mb-4">
+                  <label class="block text-sm font-medium mb-1" for="email">Email</label>
+                  <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        data-th-field="*{email}"
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <!-- Password -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-1" for="password">Password</label>
+                    <input 
+                        type="password"    
+                        id="password" 
+                        name="password" 
+                        data-th-field = "*{password}"
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                  </div>
+                
+                <!-- Gender and Date of Birth in a Single Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <!-- Gender -->
+                  <div>
+                    <label class="block text-sm font-medium mb-1" for="gender">Gender</label>
+                    <select 
+                        id="gender" 
+                        name="gender" 
+                        data-th-field="*{gender}"
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                      <option value="" disabled selected>Select your gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <!-- Date of Birth -->
+                  <div>
+                    <label class="block text-sm font-medium mb-1" for="dob">Date of Birth</label>
+                    <input 
+                        type="date" 
+                        id="dob" 
+                        name="dob" 
+                        data-th-field="*{dob}"
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                  </div>
+                </div>
+                
+                <!-- Phone Number -->
+                <div class="mb-4">
+                  <label class="block text-sm font-medium mb-1" for="phoneNumber">Phone Number</label>
+                  <input 
+                    type="text" 
+                    id="phoneNumber" 
+                    name="phoneNumber" 
+                    data-th-field="*{phone}"
+                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+
+                <!-- About -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-1" for="about">About</label>
+                    <textarea 
+                        id="about" 
+                        name="about" 
+                        rows="4" 
+                        data-th-field="*{about}"
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+
+                  </div>
+                
+                <!-- Profile Picture -->
+                <!-- <div class="mb-6">
+                  <label class="block text-sm font-medium mb-1" for="profilePic">Profile Picture</label>
+                  <input type="file" id="profilePic" name="profilePic" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div> -->
+                
+                <!-- Submit Button -->
+                <div class="text-center">
+                  <button type="submit" class="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Register</button>
+                </div>
+              </form>
+        </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      console.log("Register page loaded");
+    </script>
+  </body>
+</html>

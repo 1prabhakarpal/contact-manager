@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
-</head>
-<body>
-    <h1>Contact Us</h1>
-    <h2>Email: prabhakar.ms.pal@gmail.com</h2>
-    <h2>Phone: 773636237</h2>
-</body>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+  <head>
+    <title>Contact Us Page</title>
+  </head>
+  <body>
+    <div id="content">
+      <h1>Welcome to Contact page</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
+        ratione!
+      </p>
+    </div>
+    <script>
+      console.log("Contact page");
+    </script>
+  </body>
 </html>
