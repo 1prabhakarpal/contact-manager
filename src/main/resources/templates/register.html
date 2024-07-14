@@ -18,6 +18,14 @@
             <h5
               class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center"
             >
+
+            <!-- message here -->
+             <div
+                data-th-replace = "message :: messagebox" 
+             >
+
+             </div>
+
               Sign Up
             </h5>
             <p class="font-normal text-gray-400 dark:text-gray-400">
@@ -28,7 +36,9 @@
                 data-th-action="@{'/do-register'}" 
                 method="post" 
                 data-th-object = "${userForm}"
-                class="mt-5">
+                class="mt-5"
+                novalidate
+            >
                 <!-- First Name and Last Name in a Single Row -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <!-- First Name -->
@@ -39,7 +49,14 @@
                         id="fName" 
                         name="fName" 
                         data-th-field="*{fName}"
-                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    />
+                    <p 
+                      data-th-if="${#fields.hasErrors('fName')}"
+                      data-th-errors="*{fName}"
+                      class="text-red-600 py-2 px-1">
+                    </p>
+
                   </div>
                   <!-- Last Name -->
                   <div>
@@ -49,7 +66,14 @@
                         id="lName" 
                         name="lName" 
                         data-th-field="*{lName}"
-                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    >
+                    <p 
+                      data-th-if="${#fields.hasErrors('lName')}"
+                      data-th-errors="*{lName}"
+                      class="text-red-600 py-2 px-1">
+                    </p>
+                        
                   </div>
                 </div>
                 
@@ -61,17 +85,29 @@
                         id="email" 
                         name="email" 
                         data-th-field="*{email}"
-                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  >
+                  <p 
+                      data-th-if="${#fields.hasErrors('email')}"
+                      data-th-errors="*{email}"
+                      class="text-red-600 py-2 px-1">
+                  </p>
                 </div>
                 <!-- Password -->
                 <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1" for="password">Password</label>
+                    <label class="block text-sm font-medium mb-1" for="password">New Password</label>
                     <input 
                         type="password"    
                         id="password" 
                         name="password" 
                         data-th-field = "*{password}"
-                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    >
+                    <p 
+                      data-th-if="${#fields.hasErrors('password')}"
+                      data-th-errors="*{password}"
+                      class="text-red-600 py-2 px-1">
+                    </p>
                   </div>
                 
                 <!-- Gender and Date of Birth in a Single Row -->
@@ -83,12 +119,19 @@
                         id="gender" 
                         name="gender" 
                         data-th-field="*{gender}"
-                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                      >
                       <option value="" disabled selected>Select your gender</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                       <option value="other">Other</option>
                     </select>
+                    <p 
+                      data-th-if="${#fields.hasErrors('gender')}"
+                      data-th-errors="*{gender}"
+                      class="text-red-600 py-2 px-1">
+                    </p>
+
                   </div>
                   <!-- Date of Birth -->
                   <div>
@@ -98,7 +141,13 @@
                         id="dob" 
                         name="dob" 
                         data-th-field="*{dob}"
-                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    >
+                    <p 
+                      data-th-if="${#fields.hasErrors('dob')}"
+                      data-th-errors="*{dob}"
+                      class="text-red-600 py-2 px-1">
+                    </p>
                   </div>
                 </div>
                 
@@ -110,7 +159,13 @@
                     id="phoneNumber" 
                     name="phoneNumber" 
                     data-th-field="*{phone}"
-                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                  >
+                  <p 
+                      data-th-if="${#fields.hasErrors('phone')}"
+                      data-th-errors="*{phone}"
+                      class="text-red-600 py-2 px-1">
+                  </p>
                 </div>
 
                 <!-- About -->
@@ -121,7 +176,13 @@
                         name="about" 
                         rows="4" 
                         data-th-field="*{about}"
-                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    ></textarea>
+                    <p 
+                      data-th-if="${#fields.hasErrors('about')}"
+                      data-th-errors="*{about}"
+                      class="text-red-600 py-2 px-1">
+                    </p>
 
                   </div>
                 

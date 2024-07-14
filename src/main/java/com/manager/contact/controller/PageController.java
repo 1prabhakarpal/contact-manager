@@ -1,20 +1,24 @@
 package com.manager.contact.controller;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.manager.contact.entities.User;
 import com.manager.contact.forms.UserForm;
+import com.manager.contact.helper.Message;
+import com.manager.contact.helper.MessageType;
 import com.manager.contact.services.UserService;
 
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
 
@@ -63,16 +67,16 @@ public class PageController {
     }
 
     @PostMapping("/do-register")
-    public String processRegister(@ModelAttribute UserForm userForm) {
+    public String processRegister(@Valid @ModelAttribute UserForm userForm,BindingResult bindingResult, HttpSession session) {
         System.out.println("Processing register");
-        // TODO: fetch the form data
         System.out.println(userForm);
-        // TODO: validate the form data
-        // TODO: save the user data in the database
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
+
         Date dob = new Date();
         try {
             dob=new SimpleDateFormat("yyyy-MM-dd").parse(userForm.getDob()); 
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             
             System.out.println("DateOfBirth: " + dob); 
             
@@ -83,8 +87,9 @@ public class PageController {
             .password(userForm.getPassword())
             .about(userForm.getAbout())
             .gender(userForm.getGender())
-            //.dob(dob)
+            .dob(dob)
             .profilePic("https://shorturl.at/RIn0z")
+            .phoneNumber(userForm.getPhone())
             .build();
 
             User savedUser = userService.saveUser(user);
@@ -92,9 +97,11 @@ public class PageController {
         } catch (Exception e) {
             e.printStackTrace();
             log.error(e.getStackTrace());
+            Message message = Message.builder().content("Something Went Wrong").type(MessageType.red).build();
+            session.setAttribute("message", message);
         }
-        // TODO: message "Registration Successfull"
-        // TODO: regirect login page
+        Message message = Message.builder().content("Registration Success").type(MessageType.green).build();
+        session.setAttribute("message", message);
         return "redirect:/register";
     }
     
