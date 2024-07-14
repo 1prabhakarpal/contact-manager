@@ -54,7 +54,7 @@ public class PageController {
         return "services";
     }
     
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public String loginPage(){
         return "login";
     }

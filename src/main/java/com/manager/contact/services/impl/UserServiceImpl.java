@@ -5,10 +5,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.manager.contact.entities.User;
 import com.manager.contact.entities.repositories.UserRepo;
+import com.manager.contact.helper.AppConstants;
 import com.manager.contact.helper.ResourceNotFoundException;
 import com.manager.contact.services.UserService;
 
@@ -21,6 +23,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     // @Autowired
     // private PasswordEncoder passwordEncoder;
 
@@ -30,6 +35,8 @@ public class UserServiceImpl implements UserService {
         //Generate Dynamic UserId
         String userId = UUID.randomUUID().toString();
         user.setId(userId);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoleList(List.of(AppConstants.ROLE_USER));
         return userRepo.save(user);
     }
 
@@ -45,7 +52,7 @@ public class UserServiceImpl implements UserService {
         user2.setFName(user.getFName());
         user2.setLName(user.getLName());
         user2.setEmail(user.getEmail());
-        user2.setPassword(user.getPassword());
+        user2.setPassword(passwordEncoder.encode(user.getPassword()));
         user2.setPhoneNumber(user.getPhoneNumber());
         user2.setAbout(user.getAbout());
         user2.setGender(user.getGender());
