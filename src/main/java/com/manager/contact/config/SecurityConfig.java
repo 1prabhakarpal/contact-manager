@@ -17,6 +17,9 @@ public class SecurityConfig {
     @Autowired
     private SecurityCustomUserDetailService userDetailService;
 
+    @Autowired
+    private OAuth2AuthenticationSuccessHandler handler;
+
     //Password Encoder
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -53,10 +56,10 @@ public class SecurityConfig {
         
         // oauth configurations
 
-        // httpSecurity.oauth2Login(oauth -> {
-        //     oauth.loginPage("/login");
-        //     oauth.successHandler(handler);
-        // });
+        httpSecurity.oauth2Login(oauth -> {
+            oauth.loginPage("/login");
+            oauth.successHandler(handler);
+        });
 
         httpSecurity.logout(logoutForm -> {
             logoutForm.logoutUrl("/logout");
