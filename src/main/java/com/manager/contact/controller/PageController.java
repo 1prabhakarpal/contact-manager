@@ -54,9 +54,14 @@ public class PageController {
         return "services";
     }
     
-    @PostMapping("/login")
+    @RequestMapping("/login")
     public String loginPage(){
         return "login";
+    }
+
+    @RequestMapping("/logout")
+    public String logoutPage(){
+        return "redirect:/login?logout=true";
     }
     @RequestMapping("/register")
     public String registerPage(Model model){

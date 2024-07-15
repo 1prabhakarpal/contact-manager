@@ -20,7 +20,7 @@
 
             <!-- message here -->
              <div
-                data-th-replace = "message :: messagebox" 
+                data-th-replace = "~{message :: messagebox}" 
              >
 
              </div>
@@ -29,6 +29,17 @@
             </h5>
             <p class="font-normal text-gray-400 dark:text-gray-400">
             </p>
+
+            <div 
+              class="text-red-400 text-center my-3"
+              data-th-if="${param.error}">
+              Invalid username or password
+            </div>
+            <div 
+              class="text-green-500 text-center my-3"
+              data-th-if="${param.logout}">
+              You have been logged out
+            </div>
             <!-- This is register form -->
             <form 
                 method="post" 
