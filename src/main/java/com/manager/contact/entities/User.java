@@ -44,7 +44,6 @@ public class User implements UserDetails{
     @Column(nullable = false)
     private String fName;
 
-    @Column(nullable = false)
     private String lName;
 
     @Column(nullable = false, unique = true)
